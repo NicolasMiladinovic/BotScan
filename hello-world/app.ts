@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import axios from 'axios';
 
 /**
  *
@@ -12,9 +13,11 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
+        const response = await axios.get('https://www.japscan.me/rss/');
         return {
             statusCode: 200,
             body: JSON.stringify({
+                response: response.data,
                 message: 'hello world',
             }),
         };
